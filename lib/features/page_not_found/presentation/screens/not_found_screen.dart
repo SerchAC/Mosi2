@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
@@ -21,34 +22,51 @@ class NotFoundScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             /// 🔹 **Ilustración de error**
-            SvgPicture.asset(
-              'assets/illustrations/error_404.svg',
-              height: responsive.spaceV(200),
+            BounceInDown(
+              duration: Duration(milliseconds: 1000),
+              child: ShakeX(
+                delay: Duration(milliseconds: 1500),
+                child: SvgPicture.asset(
+                  'assets/illustrations/error_404.svg',
+                  height: responsive.spaceV(200),
+                ),
+              ),
             ),
             const VerticalSpacing(space: 24),
 
             /// 🔹 **Mensaje amigable**
-            TextBiColor(
-              text1Normal: 'Parece que te perdiste. ',
-              text2Color: 'No encontramos la página 😢',
+            FallingLettersText(
+              text: "Parece que te perdiste.",
+              style: AppTypography.titleLarge.copyWith(color: colors.onSurface),
+              duration: Duration(milliseconds: 200),
             ),
+            FallingLettersText(
+              text: "No encontramos la página",
+              style: AppTypography.titleLarge.copyWith(color: colors.primary),
+              duration: Duration(milliseconds: 400),
+            ),
+
             const VerticalSpacing(space: 8),
 
             /// 🔹 **Mensaje técnico del error (opcional)**
-            SimplyText(
+            FallingLettersText(
               text: goRouterState.error?.toString() ?? 'Error desconocido.',
-              textStyle: AppTypography.labelLarge.copyWith(
+              style: AppTypography.labelLarge.copyWith(
                 color: colors.onSurfaceVariant.withOpacityFactor(0.6),
               ),
-              textAlign: TextAlign.center,
+              duration: Duration(milliseconds: 800),
             ),
+
             const VerticalSpacing(space: 32),
 
             /// 🔹 **Botón para volver al inicio**
-            SimplyFilledButton(
-              onPress: () => NavigationService.pushTo('/'),
-              label: 'Volver al inicio',
-              icon: Symbols.home_rounded,
+            FadeInDown(
+              duration: Duration(milliseconds: 500),
+              child: SimplyFilledButton(
+                onPress: () => NavigationService.pushTo('/'),
+                label: 'Volver al inicio',
+                icon: Symbols.home_rounded,
+              ),
             ),
           ],
         ),

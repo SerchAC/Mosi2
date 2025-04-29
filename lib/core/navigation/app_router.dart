@@ -7,7 +7,7 @@ import 'package:mosi2/routes/general_routes.dart';
 class AppRouterConfig {
   static final GoRouter router = GoRouter(
     initialLocation:
-        EnvConfig.instance.isDev ? '/flows-dev' : '/welcome-screen',
+        EnvConfig.instance.isDev ? '/' : '/',
     navigatorKey: NavigationService.navigatorKey,
     errorBuilder: (_, state) => NotFoundScreen(goRouterState: state),
     routes: [
